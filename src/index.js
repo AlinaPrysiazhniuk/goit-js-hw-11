@@ -13,7 +13,6 @@ const enterDataSearchImage = event => {
   const searchImage = refs.inputSearch.value.trim();
 
   fetchImages(searchImage);
-  console.log(searchImage);
 };
 
 refs.formSearch.addEventListener('submit', enterDataSearchImage);
