@@ -1,0 +1,2 @@
+const e=e=>fetch(`https://pixabay.com/api//?key=34983998-155dfb76bac09cdf48f99cd2f&q=${e}&image_type=photo&orientation=horizontal&safesearch=true`).then((e=>e.json())).then((e=>{console.log(e)})).catch((e=>{if(!e.ok)throw new Error(e.status)}));({formSearch:document.querySelector(".search-form"),buttonSearch:document.querySelector(".search-button")}).formSearch.addEventListener("submit",(t=>{t.preventDefault(),e(name),console.log("qwqw")}));
+//# sourceMappingURL=index.39249aac.js.map
