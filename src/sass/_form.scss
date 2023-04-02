@@ -13,3 +13,9 @@ body {
   padding-left: 10px;
   max-width: 320px;
 }
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
