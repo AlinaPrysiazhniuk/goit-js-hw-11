@@ -31,11 +31,7 @@ export const fetchImages = name =>
         refs.galleryInfo.innerHTML = '';
         const item = createImageMarkup(data.hits);
         refs.galleryInfo.insertAdjacentHTML('beforeend', item);
-        refs.loadMoreBtn.addEventListener('click', () => {
-          page += 1;
-          const item = createImageMarkup(data.hits);
-          refs.galleryInfo.insertAdjacentHTML('beforeend', item);
-        });
+        page += 1;
       }
     })
     .catch(er => {

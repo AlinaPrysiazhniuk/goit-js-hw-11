@@ -28,6 +28,7 @@ const enterDataSearchImage = event => {
 };
 
 refs.formSearch.addEventListener('submit', enterDataSearchImage);
+refs.loadMoreBtn.addEventListener('click', enterDataSearchImage);
 
 export function createImageMarkup(item) {
   return item
