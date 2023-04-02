@@ -1,0 +1,2 @@
+const e={formSearch:document.querySelector(".search-form"),buttonSearch:document.querySelector(".search-button"),inputSearch:document.querySelector(".search-input")};e.formSearch.addEventListener("submit",(t=>{t.preventDefault();const o=e.inputSearch.value.trim();fetch(`https://pixabay.com/api//?key=34983998-155dfb76bac09cdf48f99cd2f&q=${o}&image_type=photo&orientation=horizontal&safesearch=true`).then((e=>e.json())).then((e=>{console.log(e)})).catch((e=>{if(!e.ok)throw new Error(e.status)})),console.log(o)}));
+//# sourceMappingURL=index.002f8bc6.js.map
