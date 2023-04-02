@@ -1,5 +1,7 @@
 import { fetchImages } from './fetchImages';
-//mport { PaginationImage } from './pagination';
+import { BASE_URL } from './fetchImages';
+import { JSONPlaceholderAPI } from './pagination';
+import { fetchImages } from './fetchImages';
 
 export const refs = {
   formSearch: document.querySelector('.search-form'),
@@ -11,14 +13,17 @@ export const refs = {
 
 const enterDataSearchImage = event => {
   event.preventDefault();
-
   const searchImage = refs.inputSearch.value.trim();
 
+  if (!searchImage) {
+    refs.galleryInfo.innerHTML = '';
+    return;
+  }
   fetchImages(searchImage);
 };
 
 refs.formSearch.addEventListener('submit', enterDataSearchImage);
-refs.loadMoreBtn.addEventListener('click', enterDataSearchImage);
+//refs.loadMoreBtn.addEventListener('click', handleLoadImages);
 
 export function createImageMarkup(item) {
   return item
@@ -35,7 +40,6 @@ export function createImageMarkup(item) {
         return `<div class="photo-card">
   <a class="image-link" href="${webformatURL}">
   <img class="photo" src="${largeImageURL}" alt="${tags}" loading="lazy" width="200" height="150"</a>
-  
   <div class="info">
     <p class="info-item">
       <b>Likes</b>
