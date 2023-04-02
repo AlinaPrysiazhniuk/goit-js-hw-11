@@ -1,10 +1,12 @@
 import { fetchImages } from './fetchImages';
+//mport { PaginationImage } from './pagination';
 
 export const refs = {
   formSearch: document.querySelector('.search-form'),
   buttonSearch: document.querySelector('.search-button'),
   inputSearch: document.querySelector('.search-input'),
   galleryInfo: document.querySelector('.gallery'),
+  loadMoreBtn: document.querySelector('.load-more'),
 };
 
 const enterDataSearchImage = event => {
@@ -16,6 +18,7 @@ const enterDataSearchImage = event => {
 };
 
 refs.formSearch.addEventListener('submit', enterDataSearchImage);
+refs.loadMoreBtn.addEventListener('click', enterDataSearchImage);
 
 export function createImageMarkup(item) {
   return item

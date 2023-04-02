@@ -1,8 +1,12 @@
 import { refs } from './index';
 import { createImageMarkup } from './index';
+import Notiflix from 'notiflix';
+import { PaginationImage } from './pagination';
 
-const BASE_URL = 'https://pixabay.com/api/';
+export const BASE_URL = 'https://pixabay.com/api/';
 const KEY = '34983998-155dfb76bac09cdf48f99cd2f';
+
+const paginationApi = new PaginationImage();
 
 export const fetchImages = name =>
   fetch(
@@ -13,13 +17,15 @@ export const fetchImages = name =>
     })
     .then(data => {
       if (data.hits.length === 0) {
-        alert(
-          `Too many matches ${data.hits} found. Please enter a more specific name.`
+        Notiflix.Notify.info(
+          `Sorry, there are no images matching your search query. Please try again.`
         );
       } else {
         const item = createImageMarkup(data.hits);
         refs.galleryInfo.insertAdjacentHTML('beforeend', item);
-        //console.log(item);
+        paginationApi.page += 1;
+
+        //refs.loadMoreBtn.classList.add('vissible');
       }
     })
     .catch(er => {
