@@ -1,4 +1,5 @@
 import { refs } from './index';
+import { createImageMarkup } from './index';
 
 const BASE_URL = 'https://pixabay.com/api/';
 const KEY = '34983998-155dfb76bac09cdf48f99cd2f';
@@ -11,10 +12,18 @@ export const fetchImages = name =>
       return response.json();
     })
     .then(data => {
-      console.log(data);
+      if (data.hits.length === 0) {
+        alert(
+          `Too many matches ${data.hits} found. Please enter a more specific name.`
+        );
+      } else {
+        const item = createImageMarkup(data.hits);
+        refs.galleryInfo.insertAdjacentHTML('beforeend', item);
+        //console.log(item);
+      }
     })
-    .catch(error => {
-      if (!error.ok) {
-        throw new Error(error.status);
+    .catch(er => {
+      if (!er.ok) {
+        throw new Error(er.status);
       }
     });
