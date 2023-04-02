@@ -1,17 +1,18 @@
-export class JSONPlaceholderAPI {
-  #BASE_URL = 'https://pixabay.com/api/';
-  page = 1;
-  count = 50;
+// import { JSONPlaceholderAPI } from './jsonplacegholder-papi';
+// //import { refs } from './index';
+// import { fetchImages } from './fetchImages';
 
-  fetchPosts() {
-    return fetch(
-      `${this.#BASE_URL}/posts?_limit=${this.count}&_page=${this.page}`
-    ).then(res => {
-      if (!res.ok) {
-        throw new Error(res.status);
-      }
+// const jsonPlaceholderApi = new JSONPlaceholderAPI();
 
-      return res.json();
-    });
-  }
-}
+// export const handleImages = () => {
+//   jsonPlaceholderApi
+//     .fetchPosts()
+//     .then(data => {
+//       console.log('hjhjh');
+//     })
+//     .catch(error => {
+//       console.log(error);
+//     });
+// };
+
+// //refs.loadMoreBtn.addEventListener('click', handleImages);

@@ -2,6 +2,9 @@ import { fetchImages } from './fetchImages';
 import { BASE_URL } from './fetchImages';
 import { JSONPlaceholderAPI } from './pagination';
 import { fetchImages } from './fetchImages';
+import { handleImages } from './pagination';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 export const refs = {
   formSearch: document.querySelector('.search-form'),
@@ -10,6 +13,8 @@ export const refs = {
   galleryInfo: document.querySelector('.gallery'),
   loadMoreBtn: document.querySelector('.load-more'),
 };
+
+const lightbox = new SimpleLightbox('.gallery a');
 
 const enterDataSearchImage = event => {
   event.preventDefault();
@@ -23,7 +28,6 @@ const enterDataSearchImage = event => {
 };
 
 refs.formSearch.addEventListener('submit', enterDataSearchImage);
-//refs.loadMoreBtn.addEventListener('click', handleLoadImages);
 
 export function createImageMarkup(item) {
   return item
@@ -39,7 +43,7 @@ export function createImageMarkup(item) {
       }) => {
         return `<div class="photo-card">
   <a class="image-link" href="${webformatURL}">
-  <img class="photo" src="${largeImageURL}" alt="${tags}" loading="lazy" width="200" height="150"</a>
+  <img class="photo" src="${largeImageURL}" alt="${tags}" loading="lazy" width="200" height="150" /></a>
   <div class="info">
     <p class="info-item">
       <b>Likes</b>
