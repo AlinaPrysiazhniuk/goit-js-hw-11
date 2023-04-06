@@ -29,7 +29,9 @@ a {
 
 .info {
   display: flex;
+  justify-content: center;
   gap: 10;
+  color: #372a07;
 }
 
 .info-item {
@@ -98,4 +100,10 @@ a {
 .loadmore-box {
   display: flex;
   justify-content: center;
+}
+
+.photo-card {
+  background-color: rgb(231, 237, 237);
+  border-radius: 10px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
 }
