@@ -10,18 +10,22 @@
   <body>
     <!-- ❗️❗️❗️ Add partials like so for every page -->
     <!-- <include src="./partials/form.html"></include> -->
-    <form class="search-form" id="search-form">
-      <input
-        type="text"
-        name="searchQuery"
-        autocomplete="off"
-        placeholder="Search images..."
-        class="search-input"
-      />
-      <button type="submit" class="search-button">Search</button>
-      <button type="button" class="load-more">Load more</button>
-    </form>
+    <div class="box-search">
+      <form class="search-form" id="search-form">
+        <input
+          type="text"
+          name="searchQuery"
+          autocomplete="off"
+          placeholder="Search images..."
+          class="search-input"
+        />
+        <button type="submit" class="search-button">Search</button>
+      </form>
+    </div>
     <div class="gallery"></div>
+    <div class="loadmore-box">
+      <button type="button" class="load-more">Load more</button>
+    </div>
     <script src="index.js" type="module"></script>
   </body>
 </html>
