@@ -1,7 +1,8 @@
 import { refs } from './index';
 import { createImageMarkup } from './index';
 import Notiflix from 'notiflix';
-import { enterDataSearchImage } from './index';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 export const BASE_URL = 'https://pixabay.com/api/';
 const KEY = '34983998-155dfb76bac09cdf48f99cd2f';
@@ -20,8 +21,6 @@ export const fetchImages = name =>
       let totalPage = data.totalHits / perPage;
       console.log(totalPage);
 
-      //console.log(imagesSearch.length);
-      //console.log(imagesSearch);
       if (imagesSearch.length === 0) {
         Notiflix.Notify.info(
           `Sorry, there are no images matching your search query. Please try again.`
@@ -31,7 +30,9 @@ export const fetchImages = name =>
         refs.galleryInfo.innerHTML = '';
         const item = createImageMarkup(data.hits);
         refs.galleryInfo.insertAdjacentHTML('beforeend', item);
-        page += 1;
+        const lightbox = new SimpleLightbox('.gallery a');
+
+        //addDataSearchImage();
       }
     })
     .catch(er => {
@@ -39,3 +40,14 @@ export const fetchImages = name =>
         throw new Error(er.status);
       }
     });
+
+// export const addDataSearchImage = () => {
+//   if (page < totalPage) {
+//     page += 1;
+//     fetchImages()
+//       .then(im => {
+//         createImageMarkup(im);
+//       })
+//       .catch(er => console.log(er));
+//   }
+// };
