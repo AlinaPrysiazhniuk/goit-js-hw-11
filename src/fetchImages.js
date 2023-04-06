@@ -32,7 +32,7 @@ export const fetchImages = name =>
         refs.galleryInfo.insertAdjacentHTML('beforeend', item);
         const lightbox = new SimpleLightbox('.gallery a');
 
-        //addDataSearchImage();
+        addDataSearchImage();
       }
     })
     .catch(er => {
@@ -41,13 +41,13 @@ export const fetchImages = name =>
       }
     });
 
-// export const addDataSearchImage = () => {
-//   if (page < totalPage) {
-//     page += 1;
-//     fetchImages()
-//       .then(im => {
-//         createImageMarkup(im);
-//       })
-//       .catch(er => console.log(er));
-//   }
-// };
+export const addDataSearchImage = () => {
+  if (page < totalPage) {
+    page += 1;
+    fetchImages()
+      .then(im => {
+        createImageMarkup(im);
+      })
+      .catch(er => console.log(er));
+  }
+};

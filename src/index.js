@@ -1,6 +1,6 @@
 import { fetchImages } from './fetchImages';
 import { fetchImages } from './fetchImages';
-import { addDataSearchImage } from './fetchImages';
+// import { addDataSearchImage } from './fetchImages';
 
 export const refs = {
   formSearch: document.querySelector('.search-form'),
