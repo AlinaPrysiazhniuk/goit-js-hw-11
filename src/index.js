@@ -44,6 +44,15 @@ async function enterDataSearchImage(event) {
         Notiflix.Notify.success(`Hooray! We found ${name.totalHits} images.`);
         createImageMarkup(name);
 
+        const { height: cardHeight } = document
+          .querySelector('.gallery')
+          .firstElementChild.getBoundingClientRect();
+
+        window.scrollBy({
+          top: cardHeight * 2,
+          behavior: 'smooth',
+        });
+
         let lightbox = new SimpleLightbox('.gallery a');
         lightbox.refresh();
 
@@ -103,6 +112,7 @@ function addDataSearchImage() {
   fetchImages(name, page).then(name => {
     let totalPages = Math.ceil(name.totalHits / perPage);
     createImageMarkup(name);
+
     let lightbox = new SimpleLightbox('.gallery a');
     lightbox.refresh();
 
