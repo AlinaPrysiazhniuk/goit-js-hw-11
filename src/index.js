@@ -48,9 +48,10 @@ async function enterDataSearchImage(event) {
         lightbox.refresh();
 
         if (page < totalPages) {
-          refs.loadMoreBtn.classList.add('is-hidden');
+          refs.loadMoreBtn.classList.add('vissible');
           console.log('qwqwqw');
         } else {
+          refs.loadMoreBtn.classList.remove('vissible');
           Notiflix.Notify.info(
             "We're sorry, but you've reached the end of search results."
           );
@@ -106,6 +107,7 @@ function addDataSearchImage() {
     lightbox.refresh();
 
     if (page >= totalPages) {
+      refs.loadMoreBtn.classList.remove('vissible');
       Notiflix.Notify.info(
         "We're sorry, but you've reached the end of search results."
       );
