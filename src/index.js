@@ -13,7 +13,7 @@ const refs = {
 
 let name = refs.inputSearch.value;
 let perPage = 40;
-let page = 0;
+let page = 1;
 
 const BASE_URL = 'https://pixabay.com/api/';
 const KEY = '34983998-155dfb76bac09cdf48f99cd2f';
@@ -23,7 +23,6 @@ async function fetchImages(name, page) {
     const response = await axios.get(
       `${BASE_URL}/?key=${KEY}&q=${name}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${perPage}`
     );
-    //console.log(response);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -32,30 +31,26 @@ async function fetchImages(name, page) {
 
 async function enterDataSearchImage(event) {
   event.preventDefault();
-  refs.galleryInfo.innerHTML = '';
   page = 1;
+  refs.galleryInfo.innerHTML = '';
+
   name = refs.inputSearch.value.trim();
 
-  //console.log(name);
   fetchImages(name, page)
     .then(name => {
-      //console.log(`Number of arrays: ${name.hits.length}`);
-      //console.log(`Total hits: ${name.totalHits}`);
       let totalPages = Math.ceil(name.totalHits / perPage);
-      // console.log(`Total pages: ${totalPages}`);
 
       if (name.hits.length > 0) {
         Notiflix.Notify.success(`Hooray! We found ${name.totalHits} images.`);
         createImageMarkup(name);
 
-        //console.log(`Current pages: ${page}`);
-
-        new SimpleLightbox('.gallery a');
+        let lightbox = new SimpleLightbox('.gallery a');
+        lightbox.refresh();
 
         if (page < totalPages) {
+          refs.loadMoreBtn.classList.add('is-hidden');
           console.log('qwqwqw');
         } else {
-          // console.log('There are no more images');
           Notiflix.Notify.info(
             "We're sorry, but you've reached the end of search results."
           );
@@ -70,56 +65,6 @@ async function enterDataSearchImage(event) {
 }
 
 refs.formSearch.addEventListener('submit', enterDataSearchImage);
-//const searchImage = refs.inputSearch.value.trim();
-
-//   refs.inputSearch.addEventListener('input', () => {
-//     if (searchImage === '') {
-//       refs.galleryInfo.innerHTML = '';
-//       return;
-//     }
-//   });
-
-//   fetchImages(searchImage);
-// }
-
-//     .then(response => {
-//       return response.json();
-//     })
-//     .then(data => {
-//       const imagesSearch = data.hits;
-//       let totalPage = data.totalHits / perPage;
-//       // console.log(totalPage);
-
-//       if (imagesSearch.length === 0) {
-//         Notiflix.Notify.info(
-//           `Sorry, there are no images matching your search query. Please try again.`
-//         );
-//       } else {
-//         Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
-//         refs.galleryInfo.innerHTML = '';
-//         const item = createImageMarkup(data.hits);
-
-//         refs.galleryInfo.insertAdjacentHTML('beforeend', item);
-//         const lightbox = new SimpleLightbox('.gallery a');
-
-//         //addDataSearchImage();
-//       }
-//     })
-//     .catch(er => {
-//       if (!er.ok) {
-//         throw new Error(er.status);
-//       }
-//     });
-// }
-
-// const addDataSearchImage = () => {
-//   refs.loadMoreBtn.addEventListener('click', () => {
-//     element = refs.inputSearch.value;
-
-//     page += 1;
-//     fetchImages(element);
-//   });
-// };
 
 function createImageMarkup(name) {
   const markup = name.hits
@@ -151,26 +96,16 @@ function createImageMarkup(name) {
   refs.galleryInfo.insertAdjacentHTML('beforeend', markup);
 }
 
-// refs.loadMoreBtn.addEventListener('click', () => {
-//   name = refs.inputSearch.value.trim();
-//   console.log('lklk');
-//   page += 1;
-//   fetchImages(name, page).then(name => {
-//     let totalPage = data.totalHits / perPage;
-//   });
-// });
-
 function addDataSearchImage() {
   name = refs.inputSearch.value.trim();
-  //console.log('load more images');
   page += 1;
   fetchImages(name, page).then(name => {
     let totalPages = Math.ceil(name.totalHits / perPage);
     createImageMarkup(name);
-    new SimpleLightbox('.gallery a');
+    let lightbox = new SimpleLightbox('.gallery a');
+    lightbox.refresh();
 
     if (page >= totalPages) {
-      // console.log('There are no more images');
       Notiflix.Notify.info(
         "We're sorry, but you've reached the end of search results."
       );
