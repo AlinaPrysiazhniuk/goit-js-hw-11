@@ -14,6 +14,7 @@ const refs = {
 let name = refs.inputSearch.value;
 let perPage = 40;
 let page = 1;
+let lightbox = new SimpleLightbox('.gallery a');
 
 const BASE_URL = 'https://pixabay.com/api/';
 const KEY = '34983998-155dfb76bac09cdf48f99cd2f';
@@ -52,9 +53,6 @@ async function enterDataSearchImage(event) {
           top: cardHeight * 2,
           behavior: 'smooth',
         });
-
-        let lightbox = new SimpleLightbox('.gallery a');
-        lightbox.refresh();
 
         if (page < totalPages) {
           refs.loadMoreBtn.classList.add('vissible');
@@ -104,7 +102,8 @@ function createImageMarkup(name) {
     })
     .join('');
   refs.galleryInfo.insertAdjacentHTML('beforeend', markup);
-}
+  lightbox.refresh();
+
 
 function addDataSearchImage() {
   name = refs.inputSearch.value.trim();
@@ -112,9 +111,6 @@ function addDataSearchImage() {
   fetchImages(name, page).then(name => {
     let totalPages = Math.ceil(name.totalHits / perPage);
     createImageMarkup(name);
-
-    let lightbox = new SimpleLightbox('.gallery a');
-    lightbox.refresh();
 
     if (page >= totalPages) {
       refs.loadMoreBtn.classList.remove('vissible');
