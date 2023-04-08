@@ -41,27 +41,6 @@ a {
   align-items: center;
 }
 
-.load-more {
-  opacity: 0;
-  margin-bottom: 10px;
-  width: 200px;
-  height: 50px;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 1.5;
-  color: white;
-  background-color: rgb(227, 165, 32);
-  border: none;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  cursor: pointer;
-  text-align: center;
-}
-
-.vissible {
-  opacity: 1;
-}
-
 .search-input {
   width: 400px;
   height: 50px;
@@ -95,14 +74,8 @@ a {
 .box-search {
   display: flex;
   justify-content: center;
-  //align-items: center;
   margin-top: 20px;
   margin-bottom: 20px;
-}
-
-.loadmore-box {
-  display: flex;
-  justify-content: center;
 }
 
 .photo-card {

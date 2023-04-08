@@ -8,7 +8,7 @@ const refs = {
   buttonSearch: document.querySelector('.search-button'),
   inputSearch: document.querySelector('.search-input'),
   galleryInfo: document.querySelector('.gallery'),
-  loadMoreBtn: document.querySelector('.load-more'),
+  infinityBox: document.querySelector('.infinity-box'),
 };
 
 let name = refs.inputSearch.value;
@@ -55,10 +55,8 @@ async function enterDataSearchImage(event) {
         });
 
         if (page < totalPages) {
-          refs.loadMoreBtn.classList.add('vissible');
-          console.log('qwqwqw');
+          observer.observe(refs.infinityBox);
         } else {
-          refs.loadMoreBtn.classList.remove('vissible');
           Notiflix.Notify.info(
             "We're sorry, but you've reached the end of search results."
           );
@@ -103,22 +101,24 @@ function createImageMarkup(name) {
     .join('');
   refs.galleryInfo.insertAdjacentHTML('beforeend', markup);
   lightbox.refresh();
-
-
-function addDataSearchImage() {
-  name = refs.inputSearch.value.trim();
-  page += 1;
-  fetchImages(name, page).then(name => {
-    let totalPages = Math.ceil(name.totalHits / perPage);
-    createImageMarkup(name);
-
-    if (page >= totalPages) {
-      refs.loadMoreBtn.classList.remove('vissible');
-      Notiflix.Notify.info(
-        "We're sorry, but you've reached the end of search results."
-      );
-    }
-  });
 }
 
-refs.loadMoreBtn.addEventListener('click', addDataSearchImage);
+const observer = new IntersectionObserver(async (entries, observer) => {
+  const [infinityBox] = entries;
+
+  if (infinityBox.isIntersecting) {
+    name = refs.inputSearch.value.trim();
+    page += 1;
+    fetchImages(name, page).then(name => {
+      let totalPages = Math.ceil(name.totalHits / perPage);
+      createImageMarkup(name);
+
+      if (page >= totalPages) {
+        observer.unobserve(refs.infinityBox);
+        Notiflix.Notify.info(
+          "We're sorry, but you've reached the end of search results."
+        );
+      }
+    });
+  }
+});
